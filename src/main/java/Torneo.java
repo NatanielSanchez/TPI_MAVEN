@@ -29,8 +29,6 @@ public class Torneo// Crea y almacena todos los datos de los equipos, partidos, 
     {
         this.resultados = new File(resultados);
         this.pronosticos = new File(pronosticos);
-        System.out.println("Archivo de partidos    --> " + this.resultados.getAbsolutePath());
-        System.out.println("Archivo de pronosticos --> " + this.pronosticos.getAbsolutePath());
         generatePartidos();
         generateParticipantes();
     }
@@ -46,6 +44,8 @@ public class Torneo// Crea y almacena todos los datos de los equipos, partidos, 
         int id_partidos = 1;
         try (Scanner sc = new Scanner(resultados))
         {
+            System.out.println("Archivo de partidos    --> " + this.resultados.getAbsolutePath());
+
             while (sc.hasNextLine())
             {
                 String linea = sc.nextLine();
@@ -98,6 +98,8 @@ public class Torneo// Crea y almacena todos los datos de los equipos, partidos, 
 
         try (Scanner sc = new Scanner(pronosticos))
         {
+            System.out.println("Archivo de pronosticos --> " + this.pronosticos.getAbsolutePath());
+
             while (sc.hasNextLine())
             {
                 String linea = sc.nextLine();
