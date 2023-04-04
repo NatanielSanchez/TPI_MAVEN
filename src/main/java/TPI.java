@@ -12,6 +12,6 @@ public class TPI
         System.out.println("\n\t*** TRABAJO PRACTICO INTEGRADOR - Grupo Atenea ***\n");
         System.out.println("--- Listado de participantes, con sus puntos y pronosticos ---");
         System.out.print(torneo.listadoParticipantes());
-        System.out.println("DONE !");
+        System.out.println("! DONE !");
     }
 }

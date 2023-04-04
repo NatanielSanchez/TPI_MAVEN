@@ -198,9 +198,9 @@ public class Torneo// Crea y almacena todos los datos de los equipos, partidos, 
     {
         // Devuelve la instancia de Partido segun el numero id.
         Partido x = null;
-        for (int i = 0; i < lista_rondas.size(); i++) // Recorre cada ronda del torneo
+        for (Ronda y : lista_rondas)
         {
-            x = lista_rondas.get(i).getPartido(num); // Ver getPartido() en Ronda
+            x = y.getPartido(num); // ver getPartido() en Ronda
             if (x != null) break;
         }
         return x;
@@ -211,11 +211,11 @@ public class Torneo// Crea y almacena todos los datos de los equipos, partidos, 
         // Devuelve un puntero de Persona si se encuentra una persona (participante) ya registrada con el nombre
         // De lo contrario, devuelve null.
         Persona x = null;
-        for (int i = 0; i < lista_personas.size(); i++)
+        for (Persona y : lista_personas)
         {
-            if ( nombre.equals(lista_personas.get(i).getNombre()) )
+            if (nombre.equals(y.getNombre()))
             {
-                x = lista_personas.get(i);
+                x = y;
                 break;
             }
         }
@@ -227,11 +227,11 @@ public class Torneo// Crea y almacena todos los datos de los equipos, partidos, 
         // Devuelve un puntero de Equipo si se encuentra un equipo ya registrada con el nombre
         // De lo contrario, devuelve null.
         Equipo x = null;
-        for (int i = 0; i < lista_equipos.size(); i++)
+        for (Equipo y : lista_equipos)
         {
-            if ( nombre.equals(lista_equipos.get(i).getNombre()) )
+            if (nombre.equals(y.getNombre()))
             {
-                x = lista_equipos.get(i);
+                x = y;
                 break;
             }
         }
@@ -243,10 +243,13 @@ public class Torneo// Crea y almacena todos los datos de los equipos, partidos, 
         // Devuelve un puntero de Ronda si se encuentra una ronda ya registrada con el mismo numero
         // De lo contrario, devuelve null.
         Ronda x = null;
-        for (int i = 0; i < lista_rondas.size(); i++)
+        for (Ronda y : lista_rondas)
         {
-            if (lista_rondas.get(i).getNumero() == num)
-                return lista_rondas.get(i);
+            if (y.getNumero() == num)
+            {
+                x = y;
+                break;
+            }
         }
         return x;
     }

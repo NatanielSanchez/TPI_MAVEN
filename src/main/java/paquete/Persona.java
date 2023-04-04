@@ -31,23 +31,21 @@ public class Persona // consiste en un identificador "nombre" y un arreglo de su
     public int calcularPuntos() // calcula el total de puntos, en relacion a los aciertos de los pronosticos
     {
         int puntos = 0;
-        for (int i=0; i < pronosticos.size(); i++)
+        for (Pronostico x : pronosticos)
         {
-            if (pronosticos.get(i).acierto()) // ver acierto() en Pronostico
-                puntos++;
+            if (x.acierto()) puntos++;
         }
         return puntos;
     }
 
     public String toString()
     {
-        String txt = "NOMBRE: " + nombre + " - PUNTOS: " + calcularPuntos() + "\n";
-        for (int i=0; i < pronosticos.size(); i++)
+        StringBuilder stb = new StringBuilder("NOMBRE: " + nombre + " - PUNTOS: " + calcularPuntos() + "\n");
+        for (Pronostico x : pronosticos)
         {
-            //txt = txt + "  -PRONOSTICO " + Integer.toString(i+1) + ": \n";
-            txt = txt + "  -PRONOSTICO DEL PARTIDO " + pronosticos.get(i).getIdPartido() + ": \n";
-            txt = txt + pronosticos.get(i).toString();
+            stb.append("  -PRONOSTICO DEL PARTIDO " + x.getIdPartido() + ": \n");
+            stb.append(x.toString());
         }
-        return txt;
+        return stb.toString();
     }
 }
