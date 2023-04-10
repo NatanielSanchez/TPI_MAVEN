@@ -40,15 +40,6 @@ public class Ronda
     public Partido getPartido(int num) // Devuelve un puntero de UN SOLO partido segun su numero ID...
     {                                  // De lo contrario, devuelve null.
         Partido x = null;
-        /*for (int i=0; i < partidos.size(); i++) // Recorre cada partido de la ronda
-        {
-            if (partidos.get(i).getId() == num)
-            {
-                x = partidos.get(i);
-                break;
-            }
-        }
-        return x;*/
         for (Partido y : partidos)
         {
             if (y.getId() == num)
@@ -79,13 +70,11 @@ public class Ronda
     public String toString()
     {
         StringBuilder stb = new StringBuilder("- RONDA " + numero + ": " + "\n");
-        int cont = 1;
         for (Partido x : partidos)
         {
-            stb.append("  *PARTIDO " + cont + ": \n");
+            stb.append("  *PARTIDO " + x.getId() + ": \n");
             stb.append(x.toString());
             stb.append("\n");
-            cont++;
         }
         return stb.toString();
     }

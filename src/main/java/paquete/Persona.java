@@ -2,12 +2,12 @@ package paquete;
 
 import java.util.ArrayList;
 
-public class Persona // consiste en un identificador "nombre" y un arreglo de sus pronosticos
+public class Persona
 {
     private final String nombre;
     private ArrayList<Pronostico> pronosticos;
 
-    public Persona(String nombre) // creo una persona con su arreglo-lista de pronosticos
+    public Persona(String nombre)
     {
         this.nombre = nombre;
         this.pronosticos = new ArrayList<Pronostico>();

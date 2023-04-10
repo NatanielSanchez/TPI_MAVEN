@@ -3,7 +3,6 @@ package paquete;
 public class Pronostico // consiste en una apuesta o prediccion hacia un equipo en un partido
 {
     private final Partido partido; // El partido particular en donde jugó el equipo
-    private final int idPartido;
     private final Equipo equipo; // El equipo al que se apuesta
     private final ResultadoEnum resultado; // La prediccion. Puede ser "ganador", "perdedor" o "empate"
 
@@ -12,7 +11,6 @@ public class Pronostico // consiste en una apuesta o prediccion hacia un equipo 
         this.partido = partido;
         this.equipo = equipo;
         this.resultado = resultado;
-        this.idPartido = partido.getId();
     }
 
     public Partido getPartido()
@@ -32,7 +30,7 @@ public class Pronostico // consiste en una apuesta o prediccion hacia un equipo 
 
     public int getIdPartido()
     {
-        return idPartido;
+        return partido.getId();
     }
 
     @Override
