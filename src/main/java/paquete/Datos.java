@@ -23,6 +23,7 @@ public class Datos
     public Datos(String resultados, String[] db_data)
     {
         this.resultados = new File(resultados);
+        System.out.println("Archivo de partidos         --> " + this.resultados.getAbsolutePath());
         generatePartidos();
         generateParticipantes(db_data);
     }
@@ -39,8 +40,6 @@ public class Datos
         int id_partidos = 1;
         try (Scanner sc = new Scanner(resultados))
         {
-            System.out.println("Archivo de partidos    --> " + this.resultados.getAbsolutePath());
-
             while (sc.hasNextLine())
             {
                 String[] datos = sc.nextLine().split(",");

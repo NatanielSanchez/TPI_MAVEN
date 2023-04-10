@@ -18,6 +18,7 @@ public class Logica
     public Logica(String resultados, String config)
     {
         this.config = new File(config);
+        System.out.println("Archivo de configuracion    --> " + this.config.getAbsolutePath());
         String[] db = readConfigFile();
         datos = new Datos(resultados, db);
         tabla_torneo = createTable(0);
