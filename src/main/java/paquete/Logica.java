@@ -11,10 +11,16 @@ public class Logica
     private int puntos_acierto;
     private int puntos_ronda;
     private int puntos_fase;
-    private File config;
+    private File config; //formato: url,usuario,password,puntos_acierto,puntos_ronda,puntos_fase
     private Datos datos;
-    private ArrayList<ArrayList> tabla_torneo;
+    private ArrayList<ArrayList> tabla_torneo; //tabla de partidos, organizada por fase y ronda
 
+    /**
+     * Recibe los archivos de texto, crea una instancia de Datos,
+     * y calcula los puntos de cada participante.
+     * @param resultados Ruta al archivo de partidos.
+     * @param config Ruta al archivo de configuracion (acceso a la DB y puntaje por aciertos)
+     */
     public Logica(String resultados, String config)
     {
         this.config = new File(config);
@@ -24,7 +30,17 @@ public class Logica
         tabla_torneo = createTable(0);
     }
 
-    public int calcularPuntos(Persona participante)
+    /**
+     * Calcula los puntos de cada participante, usando dos tablas (matrices):
+     * <p>
+     * -tabla_torneo, que representa el total de partidos del torneo, organizado por fase y ronda;
+     * <p>
+     * -tabla_participante: idéntica a la tabla del torneo, pero con valores inicializados en cero,
+     * que se van llenando segun los aciertos de los pronosticos.
+     * @param participante Persona a calcular sus puntos
+     * @return Puntos obtenidos por el participante
+     */
+    private int calcularPuntos(Persona participante)
     {
         ArrayList<ArrayList> tabla_participantes = createTable(1);
         for (Pronostico x : participante.getPronosticos())
@@ -56,14 +72,14 @@ public class Logica
                 puntos += puntos_fase;
         }
 
-        /*for (int i = 0; i < tabla_participantes.size(); i++)
-        {
-            System.out.println(tabla_participantes.get(i));
-        }*/
-
         return puntos;
     }
 
+    /**
+     * Devuelve la fase y ronda de un partido.
+     * @param idPartido Partido a buscar
+     * @return La fase y ronda del partido, en un vector.
+     */
     private int[] getFaseRonda(int idPartido)
     {
         ArrayList<Fase> fases = datos.getLista_fases();
@@ -84,7 +100,13 @@ public class Logica
         throw new InvalidParameterException("Algo salió mal en getFaseRonda()... ");
     }
 
-    public ArrayList createTable(int opc)
+    /**
+     * Crea las tablas para calcular los puntos de los participantes.
+     * @param opc Opcion 0 para crear la tabla del torneo, donde cada casilla es la cantidad de partidos.
+     *         Opcion 1 para crear la tabla del participante, donde cada casilla se inicializa en cero.
+     * @return Una matriz (cuadrada o irregular) formada por ArrayLists
+     */
+    private ArrayList createTable(int opc)
     {
         ArrayList<ArrayList> tabla = new ArrayList<>();
         for (Fase fase : datos.getLista_fases())
@@ -102,7 +124,11 @@ public class Logica
         return tabla;
     }
 
-    public String[] readConfigFile()
+    /**
+     * Lee y verifica el archivo de configuracion.
+     * @return Un vector con los datos necesarios para acceder a la DB.
+     */
+    private String[] readConfigFile()
     {
         try (Scanner sc = new Scanner(config))
         {
@@ -130,7 +156,11 @@ public class Logica
         return null;
     }
 
-    public String mostrarListado()
+    /**
+     * Devuelve un string con el nombre de cada participante y sus puntos.
+     * @return String que representa un listado de participantes y sus puntos.
+     */
+    public String listadoParticipantes()
     {
         StringBuilder stb = new StringBuilder();
         for (Persona x : datos.getLista_personas())

@@ -4,6 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Crea y almacena todos los datos de los equipos, partidos, rondas y participantes
@@ -32,23 +34,30 @@ public class Datos
      * Procesa el archivo de texto para crear las instancias de equipo, partido, ronda y fase.
      * Estas instancias se almacenan en sus listas correspondientes.
      * Cada linea del archivo corresponde a un partido.
+     * <p>
      * El contador id_partidos sirve para contar las lineas Y TAMBIEN como id de los partidos,
      * así cada partido tiene un numero de identificación UNICO Y DIFERENTE.
      */
     private void generatePartidos()
     {
+        // RegEx de verificación de lineas del archivo resultados.
+        Pattern p = Pattern.compile("\\d+,\\d+(,[^,;_:&#]+,[^,;_:&#]+,\\d+){2}");
+
         int id_partidos = 1;
         try (Scanner sc = new Scanner(resultados))
         {
             while (sc.hasNextLine())
             {
-                String[] datos = sc.nextLine().split(",");
+                String linea = sc.nextLine();
+                Matcher m = p.matcher(linea);
+
                 // Si la linea de datos tiene errores se salta a la siguiente.
-                if ( dataErrorResultados(datos) )
+                if ( ! m.matches() )
                 {
                     id_partidos++;
                     continue;
                 }
+                String[] datos = linea.split(",");
 
                 Fase fase = buscarFase( Integer.parseInt(datos[0]) );
                 if (fase == null)
@@ -91,6 +100,10 @@ public class Datos
         }
     }
 
+    /**
+     * Crea las instancias de Persona y sus Pronosticos
+     * @param db_data Datos necesarios para acceder a la DB.
+     */
     private void generateParticipantes(String[] db_data)
     {
         try
@@ -121,6 +134,8 @@ public class Datos
                         res = ResultadoEnum.EMPATE;
                         break;
                 }
+                // Si res es null, se saltea el pronostico
+                if (res == null) continue;
 
                 Partido partido = buscarPartido( rs.getInt("idPartido") );
                 // Si el partido no está registrado, se saltea el pronostico
@@ -195,7 +210,7 @@ public class Datos
      * Devuelve un puntero de Persona si se encuentra una persona (participante) ya
      * registrada con el nombre. De lo contrario, devuelve null.
      * @param nombre Nombre de la persona
-     * @return Puntero a una persona.
+     * @return Puntero a una persona, o null si no se encuentra una persona con el mismo nombre.
      */
     private Persona buscarPersona(String nombre)
     {
@@ -257,31 +272,6 @@ public class Datos
             }
         }
         return r;
-    }
-
-    /**
-     Verifica los datos de resultados.csv
-     @return false si los datos son correctos, true si hubo errores.
-     */
-    private boolean dataErrorResultados(String[] datos)
-    {
-        boolean error = false;
-        if ( datos.length != 8 ) return error = true; // cantidad de datos erronea
-        try
-        {
-            int num1 = Integer.parseInt(datos[0]); //fase
-            int num2 = Integer.parseInt(datos[1]); //ronda
-            int num3 = Integer.parseInt(datos[4]); //goles equipo1
-            int num4 = Integer.parseInt(datos[7]); //goles equipo2
-            if ( num1 < 0 || num2 < 0 || num3 < 0 || num4 < 0 ) // Datos numericos negativos
-                error = true;
-        }
-        catch (NumberFormatException ex) // Datos numericos erroneos
-        {
-            System.out.println(ex);
-            error = true;
-        }
-        return error;
     }
 
     public ArrayList<Persona> getLista_personas()
