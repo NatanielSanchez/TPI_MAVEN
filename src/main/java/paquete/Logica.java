@@ -1,10 +1,13 @@
 package paquete;
 
+import javax.naming.ConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Logica
 {
@@ -130,9 +133,14 @@ public class Logica
      */
     private String[] readConfigFile()
     {
+        Pattern p = Pattern.compile("jdbc:mysql://[^,;\\s]+:\\d+/([^,;\\s]+,){3}(\\d+,){2}\\d+");
         try (Scanner sc = new Scanner(config))
         {
-            String[] cfg = sc.nextLine().split(",");
+            String linea = sc.nextLine();
+            Matcher m = p.matcher(linea);
+            if ( ! m.matches() ) throw new ConfigFileErrorException();
+
+            String[] cfg = linea.split(",");
             puntos_acierto = Integer.parseInt(cfg[3]); // tira una exception si no es un numero.
             puntos_ronda = Integer.parseInt(cfg[4]); // tira una exception si no es un numero.
             puntos_fase = Integer.parseInt(cfg[5]); // tira una exception si no es un numero.
@@ -148,10 +156,10 @@ public class Logica
             System.out.println(ex.getMessage() + ". ! CERRANDO PROGRAMA !");
             System.exit(1);
         }
-        catch(NumberFormatException ex)
+        catch(ConfigFileErrorException ex)
         {
-            System.out.println("Dato numerico erróneo. ! VERIFIQUE EL ARCHIVO ! ");
-            throw ex;
+            System.out.println(ex.getMessage());
+            System.exit(1);
         }
         return null;
     }

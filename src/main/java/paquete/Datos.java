@@ -50,13 +50,13 @@ public class Datos
             {
                 String linea = sc.nextLine();
                 Matcher m = p.matcher(linea);
-
                 // Si la linea de datos tiene errores se salta a la siguiente.
                 if ( ! m.matches() )
                 {
                     id_partidos++;
                     continue;
                 }
+
                 String[] datos = linea.split(",");
 
                 Fase fase = buscarFase( Integer.parseInt(datos[0]) );
@@ -106,11 +106,14 @@ public class Datos
      */
     private void generateParticipantes(String[] db_data)
     {
+        Scanner sc = new Scanner(System.in);
+        System.out.print(">>> Ingrese el nombre de la tabla con los pronósticos: ");
+        String tabla = sc.nextLine();
         try
         {
             Connection conn = DriverManager.getConnection(db_data[0], db_data[1], db_data[2]);
             Statement stmt = conn.createStatement();
-            String sql = "select * from pronostico";
+            String sql = "select * from " + tabla;
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next())
             {
