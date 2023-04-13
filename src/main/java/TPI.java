@@ -1,13 +1,19 @@
 import paquete.Datos;
 import paquete.Logica;
 
-import java.util.ArrayList;
+import java.io.File;
 
 public class TPI
 {
     public static void main(String args[])
     {
-        System.out.println("\n\t\t*** TRABAJO PRACTICO INTEGRADOR - Grupo Atenea ***\n");
+        System.out.println("\n\t\t*** TRABAJO PRACTICO INTEGRADOR - Grupo Atenea ***");
+        System.out.println("* INTEGRANTES: *");
+        System.out.println("-Nataniel Sanchez");
+        System.out.print("-Katy ----> ");
+        File mi_gatita = new File("src\\main\\resources\\Katy.jpg");
+        System.out.println(mi_gatita.getAbsolutePath() + "\n");
+
         String f1 = "src\\main\\resources\\resultados.csv";
         String f2 = "src\\main\\resources\\config.csv";
         //String f1 = args[0];

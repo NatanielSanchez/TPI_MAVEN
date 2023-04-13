@@ -2,6 +2,9 @@ package paquete;
 
 import java.util.ArrayList;
 
+/**
+ * Representa un conjunto de rondas.
+ */
 public class Fase
 {
     private final int numero;
@@ -13,6 +16,10 @@ public class Fase
         this.rondas = new ArrayList<>();
     }
 
+    /**
+     * Inserta una ronda a la fase.
+     * @param x Ronda a insertar.
+     */
     public void addRonda(Ronda x)
     {
         rondas.add(x);
@@ -23,6 +30,10 @@ public class Fase
         return numero;
     }
 
+    /**
+     * Devuelve la lista de rondas de la fase.
+     * @return Lista de rondas.
+     */
     public ArrayList<Ronda> getRondas()
     {
         return rondas;

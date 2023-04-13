@@ -31,7 +31,11 @@ public class Logica
         datos = new Datos(resultados, db);
     }
 
-
+    /**
+     * Calcula los puntos de un participante.
+     * @param participante Persona a calcular sus puntos
+     * @return Cantidad de puntos obtenidos.
+     */
     private int calcularPuntos(Persona participante)
     {
         int puntos = 0;
@@ -44,22 +48,18 @@ public class Logica
                 for (Partido p : r.getPartidos())
                 {
                     boolean found = false;
-                    for (Pronostico x : participante.getPronosticos())
+                    Pronostico x = participante.getPronostico(p.getId());
+                    if (x != null)
                     {
-                        if (p.getId() == x.getIdPartido())
+                        if (x.acierto())
+                            puntos += puntos_acierto;
+                        else
                         {
-                            found = true;
-                            if (x.acierto())
-                                puntos += puntos_acierto;
-                            else
-                            {
-                                fase_completa = false;
-                                ronda_completa = false;
-                            }
-                            break;
+                            fase_completa = false;
+                            ronda_completa = false;
                         }
                     }
-                    if (!found)
+                    else
                     {
                         fase_completa = false;
                         ronda_completa = false;

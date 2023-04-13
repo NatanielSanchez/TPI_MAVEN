@@ -8,18 +8,13 @@ public class Partido // un partido entre dos equipos
     private int golesEquipo1;
     private int golesEquipo2;
 
-    public Partido()
-    {
-        this.id = -1;
-    }
-
-    public Partido(int id, Equipo a, Equipo b, int x, int y)
+    public Partido(int id, Equipo equipo1, Equipo equipo2, int golesEquipo1, int golesEquipo2)
     {
         this.id = id;
-        this.equipo1 = a;
-        this.equipo2 = b;
-        this.golesEquipo1 = x;
-        this.golesEquipo2 = y;
+        this.equipo1 = equipo1;
+        this.equipo2 = equipo2;
+        this.golesEquipo1 = golesEquipo1;
+        this.golesEquipo2 = golesEquipo2;
     }
 
     public int getId()
@@ -32,19 +27,9 @@ public class Partido // un partido entre dos equipos
         return equipo1;
     }
 
-    public void setEquipo1(Equipo equipo1)
-    {
-        this.equipo1 = equipo1;
-    }
-
     public Equipo getEquipo2()
     {
         return equipo2;
-    }
-
-    public void setEquipo2(Equipo equipo2)
-    {
-        this.equipo2 = equipo2;
     }
 
     public int getGolesEquipo1()
@@ -52,19 +37,9 @@ public class Partido // un partido entre dos equipos
         return golesEquipo1;
     }
 
-    public void setGolesEquipo1(int golesEquipo1)
-    {
-        this.golesEquipo1 = golesEquipo1;
-    }
-
     public int getGolesEquipo2()
     {
         return golesEquipo2;
-    }
-
-    public void setGolesEquipo2(int golesEquipo2)
-    {
-        this.golesEquipo2 = golesEquipo2;
     }
 
     public String toString()
@@ -73,8 +48,12 @@ public class Partido // un partido entre dos equipos
                 "\tEquipo 2: " + equipo2.toString() + " - Goles: " + golesEquipo2;
     }
 
-    public ResultadoEnum confirmarResultado(Equipo x) throws NullPointerException
-    // Equipo x representa el equipo seleccionado en un pronostico
+    /**
+     * Determina el resultado de un equipo x (que jugó en el partido)
+     * @param x Uno de los equipos del partido
+     * @return ResultadoEnum que puede ser GANADOR, PERDEDOR o EMPATE.
+     */
+    public ResultadoEnum confirmarResultado(Equipo x)
     {
         if (x == null) throw new NullPointerException("Equipo es null. Algo salio mal...");
 

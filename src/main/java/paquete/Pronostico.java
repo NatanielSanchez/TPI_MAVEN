@@ -1,6 +1,9 @@
 package paquete;
 
-public class Pronostico // consiste en una apuesta o prediccion hacia un equipo en un partido
+/**
+ * Representa una apuesta o predicción hacia un equipo de un partido jugado.
+ */
+public class Pronostico
 {
     private final Partido partido; // El partido particular en donde jugó el equipo
     private final Equipo equipo; // El equipo al que se apuesta
@@ -11,6 +14,19 @@ public class Pronostico // consiste en una apuesta o prediccion hacia un equipo 
         this.partido = partido;
         this.equipo = equipo;
         this.resultado = resultado;
+    }
+
+    /**
+     * Determina si la predicción fue acertada
+     * @return true si la predicción fue acertada, false de lo contrario.
+     */
+    public boolean acierto()
+    {
+        ResultadoEnum x = partido.confirmarResultado(equipo); //ver confirmarResultado() en Partido
+        if (x.equals(resultado))
+            return true;
+
+        return false;
     }
 
     public Partido getPartido()
@@ -28,6 +44,10 @@ public class Pronostico // consiste en una apuesta o prediccion hacia un equipo 
         return resultado;
     }
 
+    /**
+     * Devuelve la id del partido al que se hizo la apuesta.
+     * @return ID de un partido.
+     */
     public int getIdPartido()
     {
         return partido.getId();
@@ -42,12 +62,4 @@ public class Pronostico // consiste en una apuesta o prediccion hacia un equipo 
         return partido.toString() + "\n\tPREDICCION: " + equipo.toString() + " - " + resultado + "\n";
     }
 
-    public boolean acierto() //determina si la prediccion fue acertada
-    {
-        ResultadoEnum x = partido.confirmarResultado(equipo); //ver confirmarResultado() en Partido
-        if (x.equals(resultado))
-            return true;
-
-        return false;
-    }
 }

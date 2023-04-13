@@ -2,9 +2,11 @@ package paquete;
 
 import java.util.ArrayList;
 
+/**
+ * Representa un conjunto de Partidos
+ */
 public class Ronda
 {
-    private static int totalRondas = 0; // cantidad total de rondas creadas
     private final int numero;
     private ArrayList<Partido> partidos; // arreglo-lista de clase Partido
 
@@ -12,37 +14,53 @@ public class Ronda
     public Ronda() // NO SE USA ESTO
     {
         numero = -1;
-        totalRondas++;
     }
 
     public Ronda(int numero)
     {
         this.numero = numero;
         this.partidos = new ArrayList<Partido>();
-        totalRondas++;
     }
 
-    public static int getTotalRondas()
+    /**
+     * Inserta un partido a la ronda.
+     * @param x Partido a insertar.
+     */
+    public void addPartido(Partido x)
     {
-        return totalRondas;
+        partidos.add(x);
     }
 
+    /**
+     * Devuelve el numero de la ronda.
+     * @return Numero de ronda.
+     */
     public int getNumero()
     {
         return numero;
     }
 
-    public ArrayList<Partido> getPartidos() // Devuelve TODA LA LISTA DE PARTIDOS
+    /**
+     * Devuelve toda la lista de partidos de la ronda.
+     * @return ArrayList de partidos.
+     */
+    public ArrayList<Partido> getPartidos()
     {
         return partidos;
     }
 
-    public Partido getPartido(int num) // Devuelve un puntero de UN SOLO partido segun su numero ID...
-    {                                  // De lo contrario, devuelve null.
+    /**
+     * Devuelve un puntero de UN SOLO partido segun su numero ID si se encuentra en la ronda.
+     * De lo contrario devuelve null
+     * @param id ID de partido a buscar.
+     * @return Un Partido si se encuentra uno con la id, o null de lo conrario.
+     */
+    public Partido getPartido(int id)
+    {
         Partido x = null;
         for (Partido y : partidos)
         {
-            if (y.getId() == num)
+            if (y.getId() == id)
             {
                 x = y;
                 break;
@@ -51,19 +69,9 @@ public class Ronda
         return x;
     }
 
-    public void setPartidos(ArrayList<Partido> partidos)
-    {
-        this.partidos = partidos;
-    }
-
     public int getSize() // devuelve la cantidad de partidos de la ronda
     {
         return partidos.size();
-    }
-
-    public void addPartido(Partido x) // añade un partido a la ronda
-    {
-        partidos.add(x);
     }
 
     @Override
