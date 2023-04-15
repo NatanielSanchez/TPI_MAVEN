@@ -1,3 +1,4 @@
+import paquete.Color;
 import paquete.Datos;
 import paquete.Logica;
 
@@ -7,8 +8,8 @@ public class TPI
 {
     public static void main(String args[])
     {
-        System.out.println("\n\t\t*** TRABAJO PRACTICO INTEGRADOR - Grupo Atenea ***");
-        System.out.println("* INTEGRANTES: *");
+        Color.println("\n\t\t*** TRABAJO PRACTICO INTEGRADOR - Grupo Atenea ***", "blue");
+        Color.println("* INTEGRANTES: *", "blue");
         System.out.println("-Nataniel Sanchez");
         System.out.print("-Katy ----> ");
         File mi_gatita = new File("src\\main\\resources\\Katy.jpg");
@@ -20,7 +21,7 @@ public class TPI
         //String f2 = args[1];
         Logica x = new Logica(f1, f2);
 
-        System.out.println("\n--- Listado de participantes con sus puntos ---");
+        Color.println("\n--- Listado de participantes con sus puntos ---", "green");
         System.out.println(x.listadoParticipantes());
         System.out.println("! DONE !");
     }

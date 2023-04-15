@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import com.mysql.jdbc.*;
 
 /**
  * Crea y almacena todos los datos de los equipos, partidos, rondas y participantes
@@ -96,7 +97,7 @@ public class Datos
         }
         catch (IOException ex)
         {
-            System.out.println(ex.getMessage());
+            Color.println(ex.getMessage(), "red");
         }
     }
 
@@ -165,9 +166,8 @@ public class Datos
         }
         catch(SQLException ex)
         {
-            System.out.println("ERROR AL ACCEDER A LA BASE DE DATOS: " + ex.getMessage());
+            Color.println("ERROR AL ACCEDER A LA BASE DE DATOS: " + ex.getMessage(), "red");
         }
-
     }
 
     /**

@@ -98,7 +98,7 @@ public class Logica
         }
         catch(IOException ex)
         {
-            System.out.println(ex.getMessage() + ". ! CERRANDO PROGRAMA !");
+            Color.println(ex.getMessage() + ". ! CERRANDO PROGRAMA !", "red");
             System.exit(1);
         }
         catch(ConfigFileErrorException ex)
