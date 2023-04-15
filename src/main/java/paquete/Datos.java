@@ -6,7 +6,6 @@ import java.util.Scanner;
 import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import com.mysql.jdbc.*;
 
 /**
  * Crea y almacena todos los datos de los equipos, partidos, rondas y participantes
@@ -54,6 +53,9 @@ public class Datos
                 // Si la linea de datos tiene errores se salta a la siguiente.
                 if ( ! m.matches() )
                 {
+                    Color.println("[ERROR] Se salteó el proceso de esta linea: " + linea +
+                            "\n\ten " + resultados.getAbsolutePath() + " - línea " +
+                            id_partidos, "red");
                     id_partidos++;
                     continue;
                 }
@@ -98,6 +100,7 @@ public class Datos
         catch (IOException ex)
         {
             Color.println(ex.getMessage(), "red");
+            System.exit(1);
         }
     }
 
@@ -110,6 +113,7 @@ public class Datos
         Scanner sc = new Scanner(System.in);
         System.out.print(">>> Ingrese el nombre de la tabla con los pronósticos: ");
         String tabla = sc.nextLine();
+
         try
         {
             Connection conn = DriverManager.getConnection(db_data[0], db_data[1], db_data[2]);
@@ -167,6 +171,10 @@ public class Datos
         catch(SQLException ex)
         {
             Color.println("ERROR AL ACCEDER A LA BASE DE DATOS: " + ex.getMessage(), "red");
+            String host = System.getenv("MYSQL_HOST");
+            String user = System.getenv("MYSQL_USER");
+            String password = System.getenv("MYSQL_PASSWORD");
+            Color.println("host: " + host + ", user: " + user + ", password: " + password, "red");
         }
     }
 
