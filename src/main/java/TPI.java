@@ -21,7 +21,7 @@ public class TPI
                 "\n  La ID de partido se auto-genera en el programa, según el numero de línea." +
                 "\n2) La ruta a un archivo de configuración, con UNA SOLA LINEA," +
                 " con el siguiente formato:" +
-                "\n  <url de la DB>,<usuario>,<contraseña>,<puntos por acierto>," +
+                "\n<url de la DB>,<nombre de tabla>,<usuario>,<contraseña>,<puntos por acierto>," +
                 "<puntos por ronda completa>,<puntos por fase completa>" +
                 "\nLa tabla con los pronosticos debe tener las siguientes columnas: " +
                 "\n   nombre(string),idPartido(int),equipo(string),resultado(string)\n", "yellow");

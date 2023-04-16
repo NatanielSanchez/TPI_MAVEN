@@ -78,7 +78,7 @@ public class Logica
      */
     private String[] readConfigFile()
     {
-        Pattern p = Pattern.compile("jdbc:mysql://[^,;\\s]+:\\d+/([^,;\\s]+,){3}(\\d+,){2}\\d+");
+        Pattern p = Pattern.compile("jdbc:mysql://[^,;\\s]+:\\d+/([^,;\\s]+,){4}(\\d+,){2}\\d+");
         try (Scanner sc = new Scanner(config))
         {
             String linea = sc.nextLine();
@@ -86,10 +86,10 @@ public class Logica
             if ( ! m.matches() ) throw new ConfigFileErrorException();
 
             String[] cfg = linea.split(",");
-            puntos_acierto = Integer.parseInt(cfg[3]); // tira una exception si no es un numero.
-            puntos_ronda = Integer.parseInt(cfg[4]); // tira una exception si no es un numero.
-            puntos_fase = Integer.parseInt(cfg[5]); // tira una exception si no es un numero.
-            String [] y = new String[3];
+            puntos_acierto = Integer.parseInt(cfg[4]); // tira una exception si no es un numero.
+            puntos_ronda = Integer.parseInt(cfg[5]); // tira una exception si no es un numero.
+            puntos_fase = Integer.parseInt(cfg[6]); // tira una exception si no es un numero.
+            String [] y = new String[4];
             for (int i = 0; i < y.length; i++)
             {
                 y[i] = cfg[i];

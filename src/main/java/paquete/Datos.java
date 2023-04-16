@@ -111,14 +111,11 @@ public class Datos
     private void generateParticipantes(String[] db_data)
     {
         Scanner sc = new Scanner(System.in);
-        System.out.print(">>> Ingrese el nombre de la tabla con los pronósticos: ");
-        String tabla = sc.nextLine();
-
         try
         {
-            Connection conn = DriverManager.getConnection(db_data[0], db_data[1], db_data[2]);
+            Connection conn = DriverManager.getConnection(db_data[0], db_data[2], db_data[3]);
             Statement stmt = conn.createStatement();
-            String sql = "select * from " + tabla;
+            String sql = "select * from " + db_data[1];
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next())
             {

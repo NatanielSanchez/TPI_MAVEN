@@ -1,5 +1,7 @@
 package paquete;
 
+import java.security.InvalidParameterException;
+
 public class Partido // un partido entre dos equipos
 {
     private final int id;
@@ -51,11 +53,13 @@ public class Partido // un partido entre dos equipos
     /**
      * Determina el resultado de un equipo x (que jugó en el partido)
      * @param x Uno de los equipos del partido
-     * @return ResultadoEnum que puede ser GANADOR, PERDEDOR o EMPATE.
+     * @return ResultadoEnum que puede ser GANADOR, PERDEDOR o EMPATE. Devuelve null si
+     * el equipo x que entra por parametro NO JUGO EL PARTIDO.
      */
     public ResultadoEnum confirmarResultado(Equipo x)
     {
-        if (x == null) throw new NullPointerException("Equipo es null. Algo salio mal...");
+        if (x == null) throw new InvalidParameterException("Equipo es null. Algo salio mal...");
+        if ( ! ( x.equals(equipo1) || x.equals(equipo2) ) ) return null;
 
         ResultadoEnum res = null;
         if (golesEquipo1 == golesEquipo2)
