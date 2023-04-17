@@ -47,18 +47,8 @@ public class Logica
                 boolean ronda_completa = true;
                 for (Partido p : r.getPartidos())
                 {
-                    boolean found = false;
                     Pronostico x = participante.getPronostico(p.getId());
-                    if (x != null)
-                    {
-                        if (x.acierto())
-                            puntos += puntos_acierto;
-                        else
-                        {
-                            fase_completa = false;
-                            ronda_completa = false;
-                        }
-                    }
+                    if ( x != null && x.acierto() ) puntos += puntos_acierto;
                     else
                     {
                         fase_completa = false;
@@ -86,9 +76,9 @@ public class Logica
             if ( ! m.matches() ) throw new ConfigFileErrorException();
 
             String[] cfg = linea.split(",");
-            puntos_acierto = Integer.parseInt(cfg[4]); // tira una exception si no es un numero.
-            puntos_ronda = Integer.parseInt(cfg[5]); // tira una exception si no es un numero.
-            puntos_fase = Integer.parseInt(cfg[6]); // tira una exception si no es un numero.
+            puntos_acierto = Integer.parseInt(cfg[4]);
+            puntos_ronda = Integer.parseInt(cfg[5]);
+            puntos_fase = Integer.parseInt(cfg[6]);
             String [] y = new String[4];
             for (int i = 0; i < y.length; i++)
             {
