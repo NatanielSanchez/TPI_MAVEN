@@ -56,7 +56,7 @@ public class Persona
 
     public String toString()
     {
-        StringBuilder stb = new StringBuilder("NOMBRE: " + nombre + "\n");
+        StringBuilder stb = new StringBuilder(Color.CYAN + "NOMBRE: " + nombre + Color.RESET + "\n");
         for (Pronostico x : pronosticos)
         {
             stb.append("  -PRONOSTICO DEL PARTIDO " + x.getIdPartido() + ": \n");

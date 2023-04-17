@@ -103,12 +103,22 @@ public class Logica
      * Devuelve un string con el nombre de cada participante y sus puntos.
      * @return String que representa un listado de participantes y sus puntos.
      */
-    public String listadoParticipantes()
+    public String listadoPuntos()
     {
         StringBuilder stb = new StringBuilder();
         for (Persona x : datos.getLista_personas())
         {
             stb.append(x.getNombre() + " - PUNTOS: " + calcularPuntos(x) + "\n");
+        }
+        return stb.toString();
+    }
+
+    public String listadoPronosticos()
+    {
+        StringBuilder stb = new StringBuilder();
+        for (Persona x : datos.getLista_personas())
+        {
+            stb.append(x.toString() + "\n");
         }
         return stb.toString();
     }

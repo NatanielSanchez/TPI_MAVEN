@@ -3,6 +3,7 @@ import paquete.Datos;
 import paquete.Logica;
 
 import java.io.File;
+import java.util.Scanner;
 
 public class TPI
 {
@@ -38,7 +39,16 @@ public class TPI
         Logica x = new Logica(f1, f2);
 
         Color.println("\n--- Listado de participantes con sus puntos ---", "green");
-        System.out.println(x.listadoParticipantes());
+        System.out.println(x.listadoPuntos());
+
+        Scanner sc = new Scanner(System.in);
+        Color.print("¿Quiere ver el listado de pronósticos por participante? (y/n) >>> ", "yellow");
+        String opc = sc.nextLine();
+        if ( opc.toLowerCase().equals("y") )
+        {
+            Color.println("\n--- Listado de participantes y sus pronosticos ---", "green");
+            System.out.print(x.listadoPronosticos());
+        }
         Color.println("! DONE !", "green");
     }
 }
