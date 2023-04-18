@@ -80,10 +80,7 @@ public class Logica
             puntos_ronda = Integer.parseInt(cfg[5]);
             puntos_fase = Integer.parseInt(cfg[6]);
             String [] y = new String[4];
-            for (int i = 0; i < y.length; i++)
-            {
-                y[i] = cfg[i];
-            }
+            System.arraycopy(cfg, 0, y, 0, 4);
             return y;
         }
         catch(IOException ex)

@@ -46,8 +46,8 @@ public class Partido // un partido entre dos equipos
 
     public String toString()
     {
-        return "\tEquipo 1: " + equipo1.toString() + " - Goles: " + golesEquipo1 + "\n" +
-                "\tEquipo 2: " + equipo2.toString() + " - Goles: " + golesEquipo2;
+        return equipo1.toString() + " [" + golesEquipo1 + "] | [" +
+                golesEquipo2 + "] " + equipo2.toString();
     }
 
     /**

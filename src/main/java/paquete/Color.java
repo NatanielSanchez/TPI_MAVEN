@@ -10,7 +10,7 @@ package paquete;
  * invoque a RESET.</p>
  * <p>- Para usar el método print() / println(), se debe invocar con dos parámetros: el String a imprimir,
  * y el color (en inglés y en String) a utilizar.  Si el color está mal escrito, se imprime sin color.</p>
- * <p>- Colores disponibles: BLACK, RED, GREEN, YELLOW. BLUE, PURPLE, CYAN, WHITE</p>
+ * <p>- Colores disponibles: BLACK, RED, GREEN, YELLOW, BLUE, PURPLE, CYAN, WHITE</p>
  *
  */
 public abstract class Color
